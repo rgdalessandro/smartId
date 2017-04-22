@@ -12,3 +12,11 @@ export const lookupAccount = (wallet, callback) => {
     callback(err, res);
   });
 };
+
+export const createIdentityContract = (hashedUserData, publicUserData, callback) => {
+  const ContractWeb3 = web3.eth.contract(factoryABI).at(factoryAddress);
+
+  ContractWeb3.createIdentityContract.sendTransaction( wallet, {from: web3.eth.accounts[0]}, (err, res) => {
+    callback(err, res);
+  });
+};

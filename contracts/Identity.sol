@@ -117,9 +117,21 @@ contract Identity is owned {
     }
 
     function Identity(
-        address _owner
+        address _owner,
+        string _hashedUserData,
+        string _publicUserData
     ) {
         owner = _owner;
+        
+        if ( bytes(_hashedUserData).length != 0 ) {
+            hashedUserData = _hashedUserData;        
+            lastHashedUserDataChange = now;
+        }
+
+        if ( bytes(_publicUserData).length != 0 ) {
+            publicUserData = _publicUserData;        
+            lastPublicUserDataChange = now;
+        }
     }
 }
 
@@ -134,8 +146,8 @@ contract IdentityFactory {
         valid = _verify[contractAddress];
     }
 
-    function createIdentityContract() returns (address newIdentity) {
-        newIdentity = new Identity(msg.sender);
+    function createIdentityContract(string _hashedUserData, string _publicUserData) returns (address newIdentity) {
+        newIdentity = new Identity(msg.sender, _hashedUserData, _publicUserData);
 
         lookupAccount[msg.sender] = newIdentity;
         _verify[newIdentity] = true;
