@@ -17,7 +17,7 @@ export const lookupAccount = (addresses, callback) => {
 export const createIdentityContract = (hashedUserData, publicUserData, callback) => {
   const ContractWeb3 = web3.eth.contract(factoryABI).at(factoryAddress);
 
-  ContractWeb3.createIdentityContract.sendTransaction( wallet, {from: web3.eth.accounts[0]}, (err, res) => {
+  ContractWeb3.createIdentityContract.sendTransaction( hashedUserData, publicUserData, {from: web3.eth.accounts[0]}, (err, res) => {
     callback(err, res);
   });
 };
