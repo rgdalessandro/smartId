@@ -102,7 +102,7 @@ class CreateId extends Component {
             </div>
             <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10">
-                <button onClick={ this.handleSubmit.bind(this) } type="submit" className="btn btn-default">Create Id</button>
+                <button onClick={ this.handleSubmit.bind(this) } type="button" className="btn btn-default">Create Id</button>
               </div>
             </div>
           </form>

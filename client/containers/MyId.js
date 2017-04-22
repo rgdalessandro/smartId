@@ -17,7 +17,7 @@ class MyId extends Component {
     const { addresses } = this.props;
 
     if (addresses.id) return (
-      null
+      'YOU ALREADY HAVE ONE'
     );
 
     else return <CreateId addresses={ addresses } />
