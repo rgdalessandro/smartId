@@ -33,9 +33,6 @@ contract owned {
 }
 
 contract Identity is owned {
-    // Identity contract owner address
-    address public owner;
-
     // Mapping of allowed to attest addresses
     mapping(address => AllowListItem) public attestAllowedList;
 
