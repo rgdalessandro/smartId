@@ -13,7 +13,7 @@ import { lookupAccount } from '../models/blockchain';
 
 class Header extends Component {
   componentWillMount() {
-    const { addresses, setWalletAddress } = this.props;
+    const { addresses, setWalletAddress, setIdAddress } = this.props;
 
     setTimeout(() => {
       if (!window.web3) return;                                             // check for web3 network
@@ -52,7 +52,7 @@ class Header extends Component {
             <ul className="nav navbar-nav navbar-right" style={{textAlign: "right"}} >
               <li><a>
                 <div>{ addresses.wallet ? 'Account: ' + addresses.wallet : null }</div>
-                <div>{ addresses.id ? 'Id Contract: ' + addresses.id : null }</div>
+                <div>{ addresses.id ? 'Id : ' + addresses.id : null }</div>
               </a></li>
             </ul>
           </div>{/*<!-- /.navbar-collapse -->*/}
