@@ -19,8 +19,8 @@ class CreateId extends Component {
   handleSubmit() {
     const { name, email, ssn, dob } = this.state;
 
-    const publicData = { name, email };
-    const privateData = {
+    const publicData = !name && !email ? null : { name, email };
+    const privateData = !ssn && !dob ? null : {
       snn: ssn ? window.web3.sha3(ssn) : null,
       dob: dob ? window.web3.sha3(dob) : null
     };
@@ -28,12 +28,16 @@ class CreateId extends Component {
     const publicUserData = JSON.stringify(publicData);
     const hashedUserData = JSON.stringify(privateData);
 
-    createIdentityContract(hashedUserData, publicUserData, () => this.setState({
-      name: '',
-      email: '',
-      ssn: '',
-      dob: ''
-    }))
+    createIdentityContract(hashedUserData, publicUserData, (err, res) => {
+      if (err) return;
+
+      this.setState({
+        name: '',
+        email: '',
+        ssn: '',
+        dob: ''
+      })
+    })
   }
 
   render() {

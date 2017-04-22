@@ -17,7 +17,14 @@ class MyId extends Component {
     const { addresses } = this.props;
 
     if (addresses.id) return (
-      'YOU ALREADY HAVE ONE'
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3 className="panel-title">My Id</h3>
+        </div>
+        <div className="panel-body">
+
+        </div>
+      </div>
     );
 
     else return <CreateId addresses={ addresses } />

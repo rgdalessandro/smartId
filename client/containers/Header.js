@@ -12,14 +12,19 @@ import { lookupAccount } from '../models/blockchain';
 
 
 class Header extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { addresses, setWalletAddress, setIdAddress } = this.props;
 
     setTimeout(() => {
       if (!window.web3) return;                                             // check for web3 network
       addresses.wallet = window.web3 ? window.web3.eth.accounts[0] : null;  // get user wallet address from web3
       setWalletAddress(addresses);
-      setIdAddress(addresses);
+      lookupAccount(addresses.wallet, (err, res) => {
+        if (!err && res !== '0x0000000000000000000000000000000000000000') {
+          addresses.id = res;
+          setIdAddress(addresses);
+        }
+      });
     }, 100);
   }
 
@@ -52,7 +57,7 @@ class Header extends Component {
             <ul className="nav navbar-nav navbar-right" style={{textAlign: "right"}} >
               <li><a>
                 <div>{ addresses.wallet ? 'Account: ' + addresses.wallet : null }</div>
-                <div>{ addresses.id ? 'Id : ' + addresses.id : null }</div>
+                <div>{ addresses.id ? 'My Id : ' + addresses.id : null }</div>
               </a></li>
             </ul>
           </div>{/*<!-- /.navbar-collapse -->*/}
