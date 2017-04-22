@@ -8,13 +8,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { setWalletAddress, setIdAddress } from '../actions';
-import { lookupAccount } from '../models/blockchain';
+import { getIdentity } from '../models/blockchain';
 
 import CreateId from '../components/CreateId';
 
 class MyId extends Component {
   render() {
     const { addresses } = this.props;
+    // const { owner,  } = this.props.myIdentity;
 
     if (addresses.id) return (
       <div className="panel panel-default">
@@ -22,7 +23,7 @@ class MyId extends Component {
           <h3 className="panel-title">My Id</h3>
         </div>
         <div className="panel-body">
-
+          {/*owner: { owner }*/}
         </div>
       </div>
     );
@@ -31,9 +32,12 @@ class MyId extends Component {
   }
 }
 
-const mapStateToProps = (state) => { return { addresses: state.addresses } };
-const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, setIdAddress }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(MyId);
+const mapStateToProps = (state) => {
+  const { addresses, identity } = state;
+  return { addresses, identity }
+};
+//const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, setIdAddress }, dispatch);
+export default connect(mapStateToProps)(MyId);
 
 const styles = {
   title: {

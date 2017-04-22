@@ -1,5 +1,6 @@
 export const SET_WALLET_ADDRESS = 'SET_WALLET_ADDRESS';
 export const SET_ID_ADDRESS = 'SET_ID_ADDRESS';
+export const SET_MY_IDENTITY = 'SET_MY_IDENTITY';
 
 export function setWalletAddress(addresses) {
   return {
@@ -12,5 +13,13 @@ export function setIdAddress(addresses) {
   return {
     type: SET_ID_ADDRESS,
     payload: addresses
+  };
+}
+
+export function setMyIdentity(contract) {
+  console.log('~~~setMyIdentity~~~', contract);
+  return {
+    type: SET_MY_IDENTITY,
+    payload: contract
   };
 }

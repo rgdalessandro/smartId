@@ -7,8 +7,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setWalletAddress, setIdAddress } from '../actions';
-import { lookupAccount } from '../models/blockchain';
+import { setWalletAddress, setIdAddress, setMyIdentity } from '../actions';
+import { lookupAccount, getIdentity } from '../models/blockchain';
 
 
 class Header extends Component {
@@ -19,10 +19,12 @@ class Header extends Component {
       if (!window.web3) return;                                             // check for web3 network
       addresses.wallet = window.web3 ? window.web3.eth.accounts[0] : null;  // get user wallet address from web3
       setWalletAddress(addresses);
+
       lookupAccount(addresses.wallet, (err, res) => {
         if (!err && res !== '0x0000000000000000000000000000000000000000') {
           addresses.id = res;
           setIdAddress(addresses);
+          getIdentity(addresses.id, (contractData) => setMyIdentity(contractData));
         }
       });
     }, 100);
@@ -69,7 +71,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => { return { addresses: state.addresses } };
-const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, setIdAddress }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, setIdAddress, setMyIdentity }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 const styles = {
