@@ -131,7 +131,7 @@ contract IdentityFactory {
 
     mapping( address => bool ) _verify;
     // Mapping of ethereum accounts to Identity contract addresses
-    mapping( address => address ) allContracts;
+    mapping( address => address ) public lookupAccount;
 
     function verify( address contractAddress ) constant returns ( bool valid ) {
         valid = _verify[contractAddress];
@@ -140,7 +140,7 @@ contract IdentityFactory {
     function createIdentityContract() returns (address newIdentity) {
         newIdentity = new Identity(msg.sender);
 
-        allContracts[msg.sender] = newIdentity;
+        lookupAccount[msg.sender] = newIdentity;
         _verify[newIdentity] = true;
 
         NewIdentity(msg.sender, newIdentity);
