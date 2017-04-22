@@ -35,8 +35,8 @@ class Header extends Component {
               <span className="icon-bar" />
             </button>
             <a className="navbar-brand" href="#">
-              <span style={styles.title}>Smart ID</span><br/>
-              <span style={{fontSize:14}}>Identity on the blockchain</span>
+              <span style={styles.title}>affinity</span><br/>
+              <span style={{fontSize:12, color:'#bbb'}}>Identity on the blockchain</span>
             </a>
           </div>
 
