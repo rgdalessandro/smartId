@@ -13,7 +13,8 @@ import { lookupAccount, getIdentity } from '../models/blockchain';
 
 class Header extends Component {
   componentDidMount() {
-    const { addresses, setWalletAddress, setIdAddress } = this.props;
+    const { setWalletAddress, setIdAddress, setMyIdentity } = this.props;   // actions
+    const { addresses } = this.props;                                       // redux state
 
     setTimeout(() => {
       if (!window.web3) return;                                             // check for web3 network

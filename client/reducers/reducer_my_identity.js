@@ -7,9 +7,8 @@ export default function (state = {}, action) {
   switch (action.type) {
 
     case SET_MY_IDENTITY:
-      console.log('~~~SET_MY_IDENTITY reducer~~~');
       const myIdentity = action.payload;
-      return { ...state, myIdentity };
+      return { ...state, ...myIdentity };
 
     default:
       return state;

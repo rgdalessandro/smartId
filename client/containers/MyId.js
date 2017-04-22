@@ -15,7 +15,7 @@ import CreateId from '../components/CreateId';
 class MyId extends Component {
   render() {
     const { addresses } = this.props;
-    // const { owner,  } = this.props.myIdentity;
+    const { owner, publicUserData, lastPublicUserDataChange, hashedUserData, lastHashedUserDataChange, numAttestations } = this.props.myIdentity;
 
     if (addresses.id) return (
       <div className="panel panel-default">
@@ -23,7 +23,7 @@ class MyId extends Component {
           <h3 className="panel-title">My Id</h3>
         </div>
         <div className="panel-body">
-          {/*owner: { owner }*/}
+          <p>owner: { owner ? owner : 'loading...' }</p>
         </div>
       </div>
     );
@@ -32,10 +32,7 @@ class MyId extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { addresses, identity } = state;
-  return { addresses, identity }
-};
+const mapStateToProps = (state) => { return { addresses: state.addresses, myIdentity: state.myIdentity } };
 //const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, setIdAddress }, dispatch);
 export default connect(mapStateToProps)(MyId);
 

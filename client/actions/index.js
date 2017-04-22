@@ -17,7 +17,6 @@ export function setIdAddress(addresses) {
 }
 
 export function setMyIdentity(contract) {
-  console.log('~~~setMyIdentity~~~', contract);
   return {
     type: SET_MY_IDENTITY,
     payload: contract
