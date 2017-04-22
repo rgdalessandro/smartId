@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/App.js';
+import App from './components/App';
+import MyId from './containers/MyId';
 
 export default (
 	<Route path="/" component={App}>
-		{/*<IndexRoute component={} />
-		<Route path="" component={} />*/}
+		<IndexRoute component={MyId} />
+    {/*<Route path="" component={} />*/}
 	</Route>
 );

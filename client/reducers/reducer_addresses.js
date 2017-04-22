@@ -1,7 +1,7 @@
 /**
  * Created by ricardodalessandro on 4/22/17.
  */
-import { SET_WALLET_ADDRESS, FETCH_ID_ADDRESS } from '../actions';
+import { SET_WALLET_ADDRESS, SET_ID_ADDRESS } from '../actions';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -10,7 +10,7 @@ export default function (state = {}, action) {
       const { wallet } = action.payload;
       return { ...state, wallet };
 
-    case FETCH_ID_ADDRESS:
+    case SET_ID_ADDRESS:
       const { id } = action.payload;
       return { ...state, id };
 
