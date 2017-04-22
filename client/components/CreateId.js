@@ -21,8 +21,8 @@ class CreateId extends Component {
 
     const publicData = { name, email };
     const privateData = {
-      snn: window.web3.sha3(ssn),
-      dob: window.web3.sha3(dob)
+      snn: ssn ? window.web3.sha3(ssn) : null,
+      dob: dob ? window.web3.sha3(dob) : null
     };
 
     const publicUserData = JSON.stringify(publicData);
