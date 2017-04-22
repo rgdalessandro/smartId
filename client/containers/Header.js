@@ -19,7 +19,7 @@ class Header extends Component {
       if (!window.web3) return;                                             // check for web3 network
       addresses.wallet = window.web3 ? window.web3.eth.accounts[0] : null;  // get user wallet address from web3
       setWalletAddress(addresses);
-      lookupAccount(addresses, setIdAddress);
+      setIdAddress(addresses);
     }, 100);
   }
 
@@ -38,7 +38,7 @@ class Header extends Component {
               <span className="icon-bar" />
             </button>
             <a className="navbar-brand" href="#">
-              <span style={styles.title}>affinity</span><br/>
+              <span style={styles.title}>Affinity</span><br/>
               <span style={{fontSize:12, color:'#bbb'}}>Identity on the blockchain</span>
             </a>
           </div>
