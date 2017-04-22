@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import addresses from './reducer_addresses';
+
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  addresses
 });
 
 export default rootReducer;
