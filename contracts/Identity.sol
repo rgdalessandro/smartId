@@ -15,7 +15,24 @@
 
 pragma solidity ^0.4.0;
 
-contract Identity {
+contract owned {
+    address public owner;
+
+    function owned() {
+        owner = msg.sender;
+    }
+
+    modifier isOwner {
+        if (msg.sender != owner) throw;
+        _;
+    }
+
+    function transferOwnership(address newOwner) isOwner {
+        owner = newOwner;
+    }
+}
+
+contract Identity is owned {
     // Identity contract owner address
     address public owner;
 
@@ -48,11 +65,6 @@ contract Identity {
         string data; // Additional data field
         uint expirationTime;
         uint revokeTime;
-    }
-
-    modifier isOwner {
-        if (msg.sender != owner) throw;
-        _;
     }
 
     // Only allow an allowed address to attest. Don't allow owner to attest for himself
@@ -111,5 +123,31 @@ contract Identity {
         address _owner
     ) {
         owner = _owner;
+    }
+}
+
+contract IdentityFactory {
+    event NewIdentity(address owner, address contractAddress);
+
+    mapping( address => bool ) _verify;
+    // Mapping of ethereum accounts to Identity contract addresses
+    mapping( address => address ) allContracts;
+
+    function verify( address contractAddress ) constant returns ( bool valid ) {
+        valid = _verify[contractAddress];
+    }
+
+    function createIdentityContract() returns (address identity) {
+        address identity = new Identity(msg.sender);
+
+        allContracts[msg.sender] = identity;
+        _verify[identity] = true;
+
+        NewIdentity(msg.sender, identity);
+    }
+
+    // Prevents accidental sending of ether to the factory
+    function () {
+        throw;
     }
 }
