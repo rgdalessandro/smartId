@@ -137,13 +137,13 @@ contract IdentityFactory {
         valid = _verify[contractAddress];
     }
 
-    function createIdentityContract() returns (address identity) {
-        address identity = new Identity(msg.sender);
+    function createIdentityContract() returns (address newIdentity) {
+        newIdentity = new Identity(msg.sender);
 
-        allContracts[msg.sender] = identity;
-        _verify[identity] = true;
+        allContracts[msg.sender] = newIdentity;
+        _verify[newIdentity] = true;
 
-        NewIdentity(msg.sender, identity);
+        NewIdentity(msg.sender, newIdentity);
     }
 
     // Prevents accidental sending of ether to the factory
