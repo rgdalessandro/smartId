@@ -1,5 +1,5 @@
 {
-  "name": "Smart ID",
+  "name": "smartId",
   "version": "1.0.0",
   "description": "Identity and reputation on the Ethereum blockchain",
   "main": "index.js",
