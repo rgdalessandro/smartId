@@ -7,16 +7,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setWalletAddress, fetchIdAddress } from '../actions';
+import { setWalletAddress, setIdAddress } from '../actions';
+import { lookupAccount } from '../models/blockchain';
 
 
 class Header extends Component {
   componentWillMount() {
     const { addresses, setWalletAddress } = this.props;
+
     setTimeout(() => {
       if (!window.web3) return;                                             // check for web3 network
       addresses.wallet = window.web3 ? window.web3.eth.accounts[0] : null;  // get user wallet address from web3
       setWalletAddress(addresses);
+      lookupAccount(addresses, setIdAddress);
     }, 100);
   }
 
@@ -48,7 +51,8 @@ class Header extends Component {
 
             <ul className="nav navbar-nav navbar-right" style={{textAlign: "right"}} >
               <li><a>
-                <div>Account: { addresses.wallet ? addresses.wallet : null }</div>
+                <div>{ addresses.wallet ? 'Account: ' + addresses.wallet : null }</div>
+                <div>{ addresses.id ? 'Id Contract: ' + addresses.id : null }</div>
               </a></li>
             </ul>
           </div>{/*<!-- /.navbar-collapse -->*/}
@@ -60,7 +64,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => { return { addresses: state.addresses } };
-const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, fetchIdAddress }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ setWalletAddress, setIdAddress }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 const styles = {
