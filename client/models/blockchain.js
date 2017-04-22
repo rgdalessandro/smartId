@@ -22,6 +22,36 @@ export const createIdentityContract = (hashedUserData, publicUserData, callback)
   });
 };
 
+export const getIdentity = (contractAddress, callback) => {
+  const ContractWeb3 = web3.eth.contract(identityABI).at(contractAddress);
+
+  let contractData = {
+    numAttestations: null,
+    lastPublicUserDataChange: null,
+    lastHashedUserDataChange: null,
+    owner: null,
+    publicUserData: null,
+    hashedUserData: null
+  };
+
+  ContractWeb3.hashedUserDate.call((err, res)=>{
+    contractData.hashedUserData = res;
+    ContractWeb3.publicUserData.call((err, res)=>{
+      contractData.publicUserData = res;
+      ContractWeb3.lastPublicUserDataChange.call((err, res)=>{
+        contractData.lastPublicUserDataChange = res;
+        ContractWeb3.lastHashedUserDataChange.call((err, res)=>{
+          contractData.lastHashedUserDataChange = res;
+          ContractWeb3.numAttestations.call((err, res)=>{
+            contractData.numAttestations = res;
+            callback(contractData);
+          });
+        });
+      });
+    });
+  });
+};
+
 export const setPublicUserData = (contractAddress, publicUserData, callback) => {
   const ContractWeb3 = web3.eth.contract(identityABI).at(contractAddress);
 
