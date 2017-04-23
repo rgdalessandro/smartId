@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-
+import PendingModal from './PendingModal';
 import { createIdentityContract } from '../models/blockchain';
 
 class CreateId extends Component {
@@ -12,7 +12,8 @@ class CreateId extends Component {
       name: '',
       email: '',
       ssn: '',
-      dob: ''
+      dob: '',
+      isSending: false
     };
   }
 
@@ -35,9 +36,27 @@ class CreateId extends Component {
         name: '',
         email: '',
         ssn: '',
-        dob: ''
-      })
-    })
+        dob: '',
+        isSending: true
+      });
+
+      checkForTx.call(this);
+
+      function checkForTx ()
+      {
+        web3.eth.getTransaction(res, (err, res) => {
+          console.log(res);
+          if ( res.blockNumber ) {
+            this.setState({
+              isSending: false
+            });
+            location.reload();
+          } else {
+            setTimeout(checkForTx.bind(this), 5000);
+          }
+        });
+      }
+    });
   }
 
   render() {
@@ -45,6 +64,10 @@ class CreateId extends Component {
 
     return (
       <div className="panel panel-default">
+        <PendingModal
+          modalIsOpen={this.state.isSending}
+          closeModal={()=>this.setState({isSending:false})}
+        />
         <div className="panel-heading">
           <h3 className="panel-title">Create Id</h3>
         </div>
