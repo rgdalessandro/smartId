@@ -22,7 +22,7 @@ class Header extends Component {
       setWalletAddress(addresses);
 
       lookupAccount(addresses.wallet, (err, res) => {
-        if (!err && res !== '0x0000000000000000000000000000000000000000') {
+        if (!err && res !== '0x0000000000000000000000000000000000000000' && res !== '0x') {
           addresses.id = res;
           setIdAddress(addresses);
           getIdentity(addresses.id, (contractData) => setMyIdentity(contractData));
