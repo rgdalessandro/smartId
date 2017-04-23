@@ -50,7 +50,10 @@ class CreateId extends Component {
         </div>
         <div className="panel-body">
           <form className="form-horizontal">
-            Public Information:
+
+            <div style={styles.createTxt}>Fill in some basic information below to get started creating your Identity</div>
+
+            <div style={styles.heading}><i style={styles.icon} className="fa fa-users"></i> Public Information</div>
             <div className="form-group">
               <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
               <div className="col-sm-10">
@@ -77,7 +80,7 @@ class CreateId extends Component {
                 />
               </div>
             </div>
-            Private Information:
+            <div style={styles.heading}><i style={styles.icon} className="fa fa-user-secret" aria-hidden="true"></i> Private Information</div>
             <div className="form-group">
               <label htmlFor="SSN" className="col-sm-2 control-label">SSN</label>
               <div className="col-sm-10">
@@ -106,7 +109,7 @@ class CreateId extends Component {
             </div>
             <div className="form-group">
               <div className="col-sm-offset-2 col-sm-10">
-                <button onClick={ this.handleSubmit.bind(this) } type="button" className="btn btn-default">Create Id</button>
+                <button onClick={ this.handleSubmit.bind(this) } type="button" className="btn btn-default">Create Identity</button>
               </div>
             </div>
           </form>
@@ -117,3 +120,19 @@ class CreateId extends Component {
 }
 
 export default CreateId;
+
+const styles = {
+  createTxt: {
+    textAlign: "center",
+    fontWeight: 200
+  },
+  heading: {
+    color: "#666",
+    textAlign: "center",
+    margin: "14px 0",
+    fontSize: 16
+  },
+  icon: {
+    marginRight: 2
+  }
+};

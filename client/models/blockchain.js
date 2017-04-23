@@ -81,6 +81,14 @@ export const setHashedUserData = (contractAddress, hashedUserData, callback) => 
   });
 };
 
+export const getAttestation = (contractAddress, attestationID, callback) => {
+  const ContractWeb3 = web3.eth.contract(identityABI).at(contractAddress);
+
+  ContractWeb3.attestations.call( attestationID, (err, res) => {
+    callback(err, res);
+  });
+};
+
 export const authorizeAttestation = (contractAddress, allowedAddress, category, callback) => {
   const ContractWeb3 = web3.eth.contract(identityABI).at(contractAddress);
 
