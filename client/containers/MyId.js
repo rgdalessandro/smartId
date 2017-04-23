@@ -11,6 +11,7 @@ import { authorizeAttestation } from '../models/blockchain';
 import Field from '../components/Field';
 import VerifyField from '../components/VerifyField';
 import CreateId from '../components/CreateId';
+import Attestation from '../components/Attestation';
 
 class MyId extends Component {
   constructor(props) {
@@ -35,8 +36,20 @@ class MyId extends Component {
     })
   }
 
+  getAttestations () {
+    let attestations = [];
+
+    let {myIdentity} = this.props;
+
+    for ( let i = 0; i < Number(myIdentity.numAttestations.toString()); i++) {
+      attestations.push(<Attestation contractAddress={myIdentity.address} key={i} attestationID={i} />);
+    }
+
+    return attestations;
+  }
+
   render() {
-    const { addresses } = this.props;
+    const { addresses, myIdentity } = this.props;
     const { publicUserData, hashedUserData } = this.props.myIdentity;
     const { attestor, category } = this.state;
 
@@ -123,6 +136,18 @@ class MyId extends Component {
                 <button onClick={ this.handleSubmit.bind(this) } type="button" className="btn btn-default">Authorize Attestation</button>
               </div>
             </form>
+          </div>
+        </div>
+
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Attestations</h3>
+          </div>
+          <div className="panel-body">
+            { myIdentity.numAttestations && myIdentity.numAttestations.toString() != "0" ?
+              this.getAttestations.call(this)
+              : <div>There are no attestations on this identity</div>
+            }
           </div>
         </div>
       </div>

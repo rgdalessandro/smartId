@@ -12,6 +12,7 @@ import { lookupAccount, getIdentity, isAllowedToAttest, attest } from '../models
 
 import Field from '../components/Field';
 import VerifyField from '../components/VerifyField';
+import Attestation from '../components/Attestation';
 import MyId from './MyId';
 
 class SearchedIdentity extends Component {
@@ -63,6 +64,30 @@ class SearchedIdentity extends Component {
     }, 1000);
   }
 
+  getCategory (category) {
+    let type;
+
+    try {
+      type = JSON.parse(category).type
+    } catch(e) {
+      type = category;
+    }
+
+    return type;
+  }
+
+  getAttestations () {
+    let attestations = [];
+
+    let {searchedIdentity} = this.props;
+
+    for ( let i = 0; i < Number(searchedIdentity.numAttestations.toString()); i++) {
+      attestations.push(<Attestation key={i} contractAddress={searchedIdentity.address} attestationID={i} />);
+    }
+
+    return attestations;
+  }
+
   render() {
     const { isAllowed, category, data, expiration } = this.state;
     const { addresses, searchedIdentity } = this.props;
@@ -100,7 +125,7 @@ class SearchedIdentity extends Component {
         { isAllowed ?
           <div className="panel panel-primary">
             <div className="panel-heading">
-              <h3 className="panel-title">You have been authorized to write an attestation for { JSON.parse(category).type }</h3>
+              <h3 className="panel-title">You have been authorized to write an attestation for { this.getCategory(category) }</h3>
             </div>
             <div className="panel-body">
               <form className="form-inline">
@@ -164,9 +189,9 @@ class SearchedIdentity extends Component {
             <h3 className="panel-title">Attestations</h3>
           </div>
           <div className="panel-body">
-            { searchedIdentity.numAttestations && searchedIdentity.numAttestations.toString() ?
-              'show me some stuff'
-              : null
+            { searchedIdentity.numAttestations && searchedIdentity.numAttestations.toString() != "0" ?
+              this.getAttestations.call(this)
+              : <div>There are no attestations on this identity</div>
             }
           </div>
         </div>
