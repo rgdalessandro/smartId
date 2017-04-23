@@ -35,8 +35,8 @@ class Header extends Component {
     const { addresses } = this.props;
 
     return (
-      <nav className="navbar navbar-default" style={{borderRadius: "0 0 4px 4px"}}>
-        <div className="container-fluid">
+      <div className="navbar navbar-primary" style={{borderRadius: "0 0 4px 4px"}}>
+        <div>
           {/*<!-- Brand and toggle get grouped for better mobile display -->*/}
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -45,28 +45,36 @@ class Header extends Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/" style={{paddingLeft:4}}>
               <span style={styles.title}>Affinity</span><br/>
               <span style={{fontSize:12, color:'#bbb'}}>Identity on the blockchain</span>
             </a>
           </div>
 
           {/*<!-- Collect the nav links, forms, and other content for toggling -->*/}
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div className="collapse navbar-collapse" style={{paddingLeft:0}}>
             <ul className="nav navbar-nav navbar-center">
               {/*<li><a></a></li>*/}
             </ul>
 
-            <ul className="nav navbar-nav navbar-right" style={{textAlign: "right"}} >
-              <li><a>
-                <div>{ addresses.wallet ? 'Account: ' + addresses.wallet : null }</div>
-                <div>{ addresses.id ? 'My Id : ' + addresses.id : null }</div>
-              </a></li>
+            <ul className="nav navbar-nav navbar-right" style={{textAlign: "right", marginTop:10}} >
+              <li>
+                {addresses.wallet?
+                  <div style={styles.accountInfo}>
+                    <span style={styles.small}>Account: </span>
+                    <span>{addresses.wallet}</span>
+                  </div>:null}
+                {addresses.id?
+                  <div style={styles.accountInfo}>
+                    <span style={styles.small}>My Contract: </span>
+                    <span>{addresses.id}</span>
+                  </div>:null}
+              </li>
             </ul>
           </div>{/*<!-- /.navbar-collapse -->*/}
 
         </div>{/*<!-- /.container-fluid -->*/}
-      </nav>
+      </div>
     );
   }
 }
@@ -78,5 +86,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header);
 const styles = {
   title: {
     fontSize: 20
+  },
+  small: {
+    fontSize: 12,
+  },
+  accountInfo: {
+    color: "#666"
   }
 };
