@@ -66,8 +66,6 @@ class VerifyField extends Component {
       </div>
     );
   }
-
-  setInputValue(inputValue) {this.setState.call(this, { inputValue })}
 }
 
 export default VerifyField;
