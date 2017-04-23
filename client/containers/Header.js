@@ -28,7 +28,7 @@ class Header extends Component {
           getIdentity(addresses.id, (contractData) => setMyIdentity(contractData));
         }
       });
-    }, 100);
+    }, 300);
   }
 
   render() {

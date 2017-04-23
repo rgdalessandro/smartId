@@ -26,7 +26,7 @@ class MyId extends Component {
     const { attestor, category } = this.state;
     const { addresses } = this.props;
 
-    authorizeAttestation(addresses.id, attestor, JSON.stringify(category), (err, res) => {
+    authorizeAttestation(addresses.id, attestor, category, (err, res) => {
       if (err) return;
 
       this.setState({
