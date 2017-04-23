@@ -21,7 +21,7 @@ class CreateId extends Component {
 
     const publicData = !name && !email ? null : { name, email };
     const privateData = !ssn && !dob ? null : {
-      snn: ssn ? window.web3.sha3(ssn) : null,
+      ssn: ssn ? window.web3.sha3(ssn) : null,
       dob: dob ? window.web3.sha3(dob) : null
     };
 
@@ -95,7 +95,7 @@ class CreateId extends Component {
               <label htmlFor="inputDoB" className="col-sm-2 control-label">Date of Birth</label>
               <div className="col-sm-10">
                 <input
-                  type="date"
+                  type="text"
                   className="form-control"
                   id="inputDoB"
                   placeholder="YYYY-MM-DD"

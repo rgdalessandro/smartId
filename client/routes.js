@@ -3,10 +3,11 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
 import MyId from './containers/MyId';
+import SearchedIdentity from './containers/SearchedIdentity';
 
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={MyId} />
-    {/*<Route path="" component={} />*/}
+			<Route path="/:identity" component={SearchedIdentity} />
 	</Route>
 );
