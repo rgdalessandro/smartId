@@ -21,6 +21,14 @@ export const createIdentityContract = (hashedUserData, publicUserData, callback)
   });
 };
 
+export const verifyContract = (contractAddress, callback) => {
+  const ContractWeb3 = web3.eth.contract(factoryABI).at(factoryAddress);
+
+  ContractWeb3.verify.call(contractAddress, (err, res) => {
+    callback(err, res);
+  });
+};
+
 export const getIdentity = (contractAddress, callback) => {
   if(contractAddress) {
     const ContractWeb3 = web3.eth.contract(identityABI).at(contractAddress);
