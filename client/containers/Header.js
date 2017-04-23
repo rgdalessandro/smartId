@@ -45,9 +45,9 @@ class Header extends Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <a className="navbar-brand" href="/" style={{paddingLeft:4}}>
+            <a className="navbar-brand" href="/" style={{paddingLeft:4, paddingBottom: 0, lineHeight: "18px"}}>
               <span style={styles.title}>Affinity</span><br/>
-              <span style={{fontSize:12, color:'#bbb'}}>Identity on the blockchain</span>
+              <span style={{fontSize:12, color:'#929292'}}>Identity on the blockchain</span>
             </a>
           </div>
 
@@ -85,7 +85,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 const styles = {
   title: {
-    fontSize: 20
+    fontSize: 20,
+    color: "#3c71ab"
   },
   small: {
     fontSize: 12,

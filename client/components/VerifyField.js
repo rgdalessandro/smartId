@@ -5,6 +5,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import {getTypeData} from '../models/typeList';
 
 class VerifyField extends Component {
   constructor(props) {
@@ -19,20 +20,6 @@ class VerifyField extends Component {
     title: PropTypes.string,
     value: PropTypes.string,
   };
-
-  getTitle (title) {
-    const pairs = {
-      dob: "Date of Birth",
-      ssn: "SSN #",
-      snn: "SSN #",
-    };
-
-    if ( pairs[title] ) {
-      return pairs[title];
-    } else {
-      return title;
-    }
-  }
 
   verify() {
     return web3.sha3(this.state.inputValue) == this.props.value;
@@ -54,7 +41,7 @@ class VerifyField extends Component {
 
     return (
       <div style={ styles.container } >
-        <div style={styles.title}>{this.getTitle(this.props.title)}</div>
+        <div style={styles.title}>{getTypeData(this.props.title).title}</div>
 
         <form className="form-inline">
           <div className="form-group">
@@ -62,7 +49,7 @@ class VerifyField extends Component {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Value to verify"
+                placeholder={getTypeData(this.props.title).placeholder?getTypeData(this.props.title).placeholder:"Value to verify"}
                 onChange={res=>this.setState({inputValue: res.target.value})}
                 onClick={this.verify.bind(this)}
                 style={{...styles.input, ...inputStyle}}
@@ -79,8 +66,6 @@ class VerifyField extends Component {
       </div>
     );
   }
-
-  setInputValue(inputValue) {this.setState.call(this, { inputValue })}
 }
 
 export default VerifyField;
