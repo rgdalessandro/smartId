@@ -97,10 +97,10 @@ export const attest = (contractAddress, data, expirationTime, callback) => {
   });
 };
 
-export const isAllowedToAttest = (contractAddress, address, callback) => {
+export const isAllowedToAttest = (contractAddress, attestorAddress, callback) => {
   const ContractWeb3 = web3.eth.contract(identityABI).at(contractAddress);
 
-  ContractWeb3.attestAllowedList.call(address, (err, res) => {
+  ContractWeb3.attestAllowedList.call(attestorAddress, (err, res) => {
     callback(err, res);
   });
 };

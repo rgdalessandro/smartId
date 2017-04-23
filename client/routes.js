@@ -8,6 +8,6 @@ import SearchedIdentity from './containers/SearchedId';
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={MyId} />
-			<Route path="/:identity" component={SearchedIdentity} />
+			<Route path="/contract/:identity" component={SearchedIdentity} />
 	</Route>
 );

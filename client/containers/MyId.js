@@ -25,7 +25,7 @@ class MyId extends Component {
     const { attestor, category } = this.state;
     const { addresses } = this.props;
 
-    authorizeAttestation(addresses.id, attestor, category, (err, res) => {
+    authorizeAttestation(addresses.id, attestor, JSON.stringify(category), (err, res) => {
       if (err) return;
 
       this.setState({
@@ -113,7 +113,7 @@ class MyId extends Component {
                     className="form-control"
                     style={ styles.input }
                     id="category"
-                    placeholder="YYYY-MM-DD"
+                    placeholder="Category"
                     value={ category }
                     onChange={ (e) => this.setState({ category: e.target.value }) }
                   />
