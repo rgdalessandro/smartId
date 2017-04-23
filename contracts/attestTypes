@@ -1,0 +1,14 @@
+Categories:
+
+{
+    "v": "0.1.0",
+    type: "verifyFields"
+}
+
+Attestations:
+
+{
+    "v": "0.1.0",
+    type: "verifyFields",
+    fields: ['dob', 'address', "name"]
+}
