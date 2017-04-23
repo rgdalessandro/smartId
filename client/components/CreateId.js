@@ -67,6 +67,7 @@ class CreateId extends Component {
         <PendingModal
           modalIsOpen={this.state.isSending}
           closeModal={()=>this.setState({isSending:false})}
+          text={"Creating identity on Ethereum blockchain"}
         />
         <div className="panel-heading">
           <h3 className="panel-title">Create Id</h3>

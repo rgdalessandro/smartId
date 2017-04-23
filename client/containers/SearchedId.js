@@ -14,6 +14,7 @@ import Field from '../components/Field';
 import VerifyField from '../components/VerifyField';
 import Attestation from '../components/Attestation';
 import MyId from './MyId';
+import PendingModal from '../components/PendingModal';
 
 class SearchedIdentity extends Component {
   constructor(props) {
@@ -23,22 +24,41 @@ class SearchedIdentity extends Component {
       isAllowed: false,
       category: null,
       data: null,
-      expiration: null
+      expiration: null,
+      isSending: false
     }
   }
 
-  handleSubmit() {
+  handleAttest() {
     const { identity, data, expiration } = this.state;
 
-    attest(identity, data, expiration, (err, res) => {
+    attest(identity, data, expiration, (err, txHash) => {
       if (err) return;
 
       this.setState({
         isAllowed: '',
         category: '',
         data: '',
-        expiration: ''
-      })
+        expiration: '',
+        isSending: true
+      });
+
+      checkForTx.call(this);
+
+      function checkForTx ()
+      {
+        web3.eth.getTransaction(txHash, (err, res) => {
+          console.log(res);
+          if ( res.blockNumber ) {
+            this.setState({
+              isSending: false
+            });
+            location.reload();
+          } else {
+            setTimeout(checkForTx.bind(this), 5000);
+          }
+        });
+      }
     })
   }
 
@@ -122,6 +142,11 @@ class SearchedIdentity extends Component {
 
     else if (searchedIdentity && owner !== '0x' ) return (
       <div>
+        <PendingModal
+          text={"Attesting"}
+          modalIsOpen={this.state.isSending}
+          closeModal={()=>this.setState({isSending:false})}
+        />
         <div style={styles.heading}>Contract {this.props.params.identity}</div>
 
         { isAllowed ?
@@ -160,7 +185,7 @@ class SearchedIdentity extends Component {
                   </div>
                 </div>
                 <div style={ styles.button }>
-                  <button onClick={ this.handleSubmit.bind(this) } type="button" className="btn btn-default">Attest</button>
+                  <button onClick={ this.handleAttest.bind(this) } type="button" className="btn btn-default">Attest</button>
                 </div>
               </form>
             </div>

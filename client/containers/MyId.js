@@ -12,13 +12,15 @@ import Field from '../components/Field';
 import VerifyField from '../components/VerifyField';
 import CreateId from '../components/CreateId';
 import Attestation from '../components/Attestation';
+import PendingModal from '../components/PendingModal';
 
 class MyId extends Component {
   constructor(props) {
     super(props);
     this.state = {
       attestor: '',
-      category: ''
+      category: '',
+      isSending: false
     }
   }
 
@@ -26,13 +28,31 @@ class MyId extends Component {
     const { attestor, category } = this.state;
     const { addresses } = this.props;
 
-    authorizeAttestation(addresses.id, attestor, category, (err, res) => {
+    authorizeAttestation(addresses.id, attestor, category, (err, txHash) => {
       if (err) return;
 
       this.setState({
         attestor: '',
-        category: ''
-      })
+        category: '',
+        isSending: true
+      });
+
+      checkForTx.call(this);
+
+      function checkForTx ()
+      {
+        web3.eth.getTransaction(txHash, (err, res) => {
+          console.log(res);
+          if ( res.blockNumber ) {
+            this.setState({
+              isSending: false
+            });
+            location.reload();
+          } else {
+            setTimeout(checkForTx.bind(this), 5000);
+          }
+        });
+      }
     })
   }
 
@@ -80,6 +100,11 @@ class MyId extends Component {
 
     if (addresses.id) return (
       <div>
+        <PendingModal
+          text={"Authorizing attestation"}
+          modalIsOpen={this.state.isSending}
+          closeModal={()=>this.setState({isSending:false})}
+        />
         <div style={styles.heading}>My Identity</div>
 
         <div className="panel panel-default">

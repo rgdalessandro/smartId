@@ -2,13 +2,13 @@ Categories:
 
 {
     "v": "0.1.0",
-    type: "verifyFields"
+    "type": "verifyFields"
 }
 
 Attestations:
 
 {
     "v": "0.1.0",
-    type: "verifyFields",
-    fields: ['dob', 'address', "name"]
+    "type": "verifyFields",
+    "fields": ["dob", "address", "name"]
 }

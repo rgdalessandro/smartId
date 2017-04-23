@@ -1,6 +1,6 @@
 'use strict'
 
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
 import Modal from "react-modal";
 
 class PendingModal extends Component {
@@ -8,10 +8,11 @@ class PendingModal extends Component {
     super(props);
   }
 
-  static propTypes = {
-    closeModal: PropTypes.func,
-    modalIsOpen: PropTypes.bool,
-  };
+  // static propTypes = {
+  //   closeModal: PropTypes.func,
+  //   modalIsOpen: PropTypes.bool,
+  //   text: PropTypes.string.isRequired,
+  // };
 
   render() {
     return (
@@ -24,7 +25,7 @@ class PendingModal extends Component {
         contentLabel="Modal"
       >
         <div style={styles.modalText}>
-          <div>Creating identity on Ethereum blockchain</div>
+          <div>{this.props.text}</div>
           <div style={styles.pleaseWait}>Please wait...</div>
 
           <div style={styles.loadingContainer}>
