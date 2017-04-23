@@ -10,6 +10,8 @@ import { bindActionCreators } from 'redux';
 import { setSearchedIdentity } from '../actions';
 import { lookupAccount, getIdentity } from '../models/blockchain';
 
+import VerifyField from '../components/VerifyField';
+import Field from '../components/Field';
 import MyId from './MyId';
 
 class SearchedIdentity extends Component {
@@ -26,17 +28,53 @@ class SearchedIdentity extends Component {
 
   render() {
     const { addresses, searchedIdentity } = this.props;
-    const { owner, publicUserData, lastPublicUserDataChange, hashedUserData, lastHashedUserDataChange, numAttestations } = searchedIdentity;
+    const { owner, publicUserData, hashedUserData } = searchedIdentity;
+
+    let hashedUserDataArr = [];
+    let publicUserDataArr = [];
+
+    if ( hashedUserData ) {
+      let hashedUserDataObj = JSON.parse(hashedUserData);
+
+      for ( let i in hashedUserDataObj ) {
+        hashedUserDataArr.push({
+          title: i,
+          value: hashedUserDataObj[i]
+        });
+      }
+    }
+
+    if ( publicUserData ) {
+      let publicUserDataObj = JSON.parse(publicUserData);
+
+      for ( let i in publicUserDataObj ) {
+        publicUserDataArr.push({
+          title: i,
+          value: publicUserDataObj[i]
+        });
+      }
+    }
 
     if (addresses.wallet === owner) return <MyId />;
 
     else if (searchedIdentity && owner !== '0x' ) return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title">Searched Id</h3>
+      <div>
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Public Data</h3>
+          </div>
+          <div className="panel-body">
+            {publicUserDataArr.map(item=><Field key={item.title} title={item.title} value={item.value}/>)}
+          </div>
         </div>
-        <div className="panel-body">
-          <p>owner: { owner ? owner : 'loading...' }</p>
+
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Private Data</h3>
+          </div>
+          <div className="panel-body">
+            {hashedUserDataArr.map(item=><VerifyField key={item.title} title={item.title} value={item.value}/>)}
+          </div>
         </div>
       </div>
     );
