@@ -80,6 +80,8 @@ class MyId extends Component {
 
     if (addresses.id) return (
       <div>
+        <div style={styles.heading}>My Identity</div>
+
         <div className="panel panel-default">
           <div className="panel-heading">
             <h3 className="panel-title">Public Data</h3>
@@ -174,5 +176,10 @@ const styles = {
   },
   button: {
     marginTop: 12
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 200,
+    marginBottom: 10
   }
 };

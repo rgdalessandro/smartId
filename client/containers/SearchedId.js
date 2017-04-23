@@ -122,6 +122,8 @@ class SearchedIdentity extends Component {
 
     else if (searchedIdentity && owner !== '0x' ) return (
       <div>
+        <div style={styles.heading}>Contract {this.props.params.identity}</div>
+
         { isAllowed ?
           <div className="panel panel-primary">
             <div className="panel-heading">
@@ -220,5 +222,10 @@ const styles = {
   },
   button: {
     marginTop: 12
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 200,
+    marginBottom: 10
   }
 };

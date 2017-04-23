@@ -34,7 +34,6 @@ class Attestation extends Component {
         data: res[3],
         expirationTime: res[4]
       });
-
     });
   }
 
@@ -49,7 +48,7 @@ class Attestation extends Component {
             {moment(time*1000).format("LLLL")}
           </div>
           <div className="panel-body">
-            <div>From: {from}</div>
+            <div>From: <a href={"/contract/" + from}>{from}</a></div>
             <div>Type: {category?JSON.parse(category).type:null}</div>
             <div className="well" style={styles.well}>{data}</div>
 
