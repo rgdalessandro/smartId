@@ -10,8 +10,8 @@ import { bindActionCreators } from 'redux';
 import { setSearchedIdentity } from '../actions';
 import { lookupAccount, getIdentity } from '../models/blockchain';
 
-import VerifyField from '../components/VerifyField';
 import Field from '../components/Field';
+import VerifyField from '../components/VerifyField';
 import MyId from './MyId';
 
 class SearchedIdentity extends Component {

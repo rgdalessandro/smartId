@@ -6,8 +6,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import VerifyField from '../components/VerifyField';
 import Field from '../components/Field';
+import VerifyField from '../components/VerifyField';
 import CreateId from '../components/CreateId';
 
 class MyId extends Component {
