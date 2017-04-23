@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
 import MyId from './containers/MyId';
-import SearchedIdentity from './containers/SearchedIdentity';
+import SearchedIdentity from './containers/SearchedId';
 
 export default (
 	<Route path="/" component={App}>
