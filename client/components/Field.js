@@ -8,6 +8,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import {getTypeData} from '../models/typeList';
 
 class Field extends Component {
   constructor(props) {
@@ -23,27 +24,11 @@ class Field extends Component {
     value: PropTypes.string,
   };
 
-  getTitle (title) {
-    const pairs = {
-      dob: "Date of Birth",
-      ssn: "SSN #",
-      snn: "SSN #",
-      name: "Name",
-      email: "E-mail  "
-    };
-
-    if ( pairs[title] ) {
-      return pairs[title];
-    } else {
-      return title;
-    }
-  }
-
   render() {
 
     return (
       <div style={ styles.container } >
-        <div style={styles.title}>{this.getTitle(this.props.title)}</div>
+        <div style={styles.title}>{getTypeData(this.props.title).title}</div>
 
         <div style={styles.value}>{this.props.value}</div>
       </div>
