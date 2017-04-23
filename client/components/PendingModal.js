@@ -1,6 +1,6 @@
 'use strict'
 
-import React, {Component} from "react";
+import React, {Component, PropTypes} from "react";
 import Modal from "react-modal";
 
 class PendingModal extends Component {
@@ -8,11 +8,11 @@ class PendingModal extends Component {
     super(props);
   }
 
-  // static propTypes = {
-  //   closeModal: PropTypes.func,
-  //   modalIsOpen: PropTypes.bool,
-  //   text: PropTypes.string.isRequired,
-  // };
+  static propTypes = {
+    closeModal: PropTypes.func,
+    modalIsOpen: PropTypes.bool,
+    text: PropTypes.string.isRequired,
+  };
 
   render() {
     return (

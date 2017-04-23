@@ -70,7 +70,7 @@ class CreateId extends Component {
           text={"Creating identity on Ethereum blockchain"}
         />
         <div className="panel-heading">
-          <h3 className="panel-title">Create Id</h3>
+          <h3 className="panel-title">Create Identity</h3>
         </div>
         <div className="panel-body">
           <form className="form-horizontal">
