@@ -1,10 +1,10 @@
-AFFINITY v1.0.0
+AFFINITY v0.1.0
 
-Affinity is an open source, decentralized standard for the exchange and validation of information, attestations and reputation in an otherwise anonymous peer-to-peer network.
+Affinity is an open source, decentralized standard for the exchange and validation of identifying information, attestations and reputation for participants in an otherwise anonymous peer-to-peer network and for the general human population.
 
 The current standard allows for storing three (3) categories of information:
 
-1) Public Information(publicUserData)
+1) Public Information (publicUserData)
 
 Example:
 
@@ -42,7 +42,7 @@ Attestation:
     "fields": ["dob", "address", "name"]
 }
 
-Standardized field names:
+Current standard field names:
 [
     'name',
     'firstName',
