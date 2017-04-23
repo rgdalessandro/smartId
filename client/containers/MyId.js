@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import VerifyField from '../components/VerifyField';
 import { bindActionCreators } from 'redux';
 
 import { setWalletAddress, setIdAddress } from '../actions';
@@ -17,13 +18,28 @@ class MyId extends Component {
     const { addresses } = this.props;
     const { owner, publicUserData, lastPublicUserDataChange, hashedUserData, lastHashedUserDataChange, numAttestations } = this.props.myIdentity;
 
+    let hashedUserDataArr = [];
+
+    if ( hashedUserData ) {
+      let hashedUserDataObj = JSON.parse(hashedUserData);
+
+      for ( let i in hashedUserDataObj ) {
+        hashedUserDataArr.push({
+          title: i,
+          value: hashedUserDataObj[i]
+        });
+      }
+    }
+
     if (addresses.id) return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">My Id</h3>
+          <h3 className="panel-title">My ID</h3>
         </div>
         <div className="panel-body">
-          <p>owner: { owner ? owner : 'loading...' }</p>
+          {/*<p>owner: { owner ? owner : 'loading...' }</p>*/}
+
+          {hashedUserDataArr.map(item=><VerifyField key={item.title} title={item.title} value={item.value}/>)}
         </div>
       </div>
     );
@@ -38,6 +54,7 @@ export default connect(mapStateToProps)(MyId);
 
 const styles = {
   title: {
-    fontSize: 20
+    fontSize: 14,
+    color: "#666"
   }
 };
