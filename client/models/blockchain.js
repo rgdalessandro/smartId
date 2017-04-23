@@ -46,6 +46,7 @@ export const getIdentity = (contractAddress, callback) => {
               contractData.numAttestations = res;
               ContractWeb3.owner.call((err, res)=>{
                 contractData.owner = res;
+                contractData.address = contractAddress;
                 callback(contractData);
               });
             });

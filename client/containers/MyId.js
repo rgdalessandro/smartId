@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import VerifyField from '../components/VerifyField';
+import Field from '../components/Field';
 import { bindActionCreators } from 'redux';
 
 import { setWalletAddress, setIdAddress } from '../actions';
@@ -19,6 +20,7 @@ class MyId extends Component {
     const { owner, publicUserData, lastPublicUserDataChange, hashedUserData, lastHashedUserDataChange, numAttestations } = this.props.myIdentity;
 
     let hashedUserDataArr = [];
+    let publicUserDataArr = [];
 
     if ( hashedUserData ) {
       let hashedUserDataObj = JSON.parse(hashedUserData);
@@ -31,16 +33,40 @@ class MyId extends Component {
       }
     }
 
+    if ( publicUserData ) {
+      let publicUserDataObj = JSON.parse(publicUserData);
+
+      for ( let i in publicUserDataObj ) {
+        publicUserDataArr.push({
+          title: i,
+          value: publicUserDataObj[i]
+        });
+      }
+    }
+
     if (addresses.id) return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title">My ID</h3>
-        </div>
-        <div className="panel-body">
+      <div >
+
           {/*<p>owner: { owner ? owner : 'loading...' }</p>*/}
 
-          {hashedUserDataArr.map(item=><VerifyField key={item.title} title={item.title} value={item.value}/>)}
-        </div>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3 className="panel-title">Public Data</h3>
+            </div>
+            <div className="panel-body">
+              {publicUserDataArr.map(item=><Field key={item.title} title={item.title} value={item.value}/>)}
+            </div>
+          </div>
+
+        <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3 className="panel-title">Private Data</h3>
+            </div>
+            <div className="panel-body">
+              {hashedUserDataArr.map(item=><VerifyField key={item.title} title={item.title} value={item.value}/>)}
+            </div>
+          </div>
+
       </div>
     );
 
